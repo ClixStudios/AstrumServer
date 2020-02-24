@@ -12,7 +12,11 @@ app.get('/', function (req, res) {
       res.sendFile(__dirname + '/html/index.html');
 });
 
+<<<<<<< HEAD
 app.get('/image', function (req, res) {
+=======
+app.get('/image', function (req, res){
+>>>>>>> 9ef8e2c423baacf97936f6d9ffd621f7d01c7a27
       console.log('Sending Image');
       res.sendFile(__dirname + '/image.png');
 })
@@ -21,7 +25,7 @@ clientNamespace.on('connection', function (socket) {
 
       console.log('Client connected');
 
-      lobbyPlayers.push({ clientId: socket.id })
+      lobbyPlayers.push({ clientId: socket.id });
 
       // Tell server about new player
       serverNamespace.emit('PlayerJoined', { clientId: socket.id });
