@@ -63,6 +63,7 @@ serverNamespace.on('connection', function (socket) {
       });
 
       socket.on('Ping', (data, cb) => {
+            console.log('Hello there')
             cb(200);
       });
 
