@@ -41,7 +41,9 @@ clientNamespace.on('connection', function (socket) {
 
       socket.on('disconnect', function () {
             console.log('Client disconnected');
+            // console.log(socket.id);
 
+            serverNamespace.emit('PlayerLeft', { clientId: socket.id });
             // Remove player from array
             lobbyPlayers = lobbyPlayers.filter((value, index, array) => {
                   return !(value.clientId == socket.id);
@@ -49,6 +51,16 @@ clientNamespace.on('connection', function (socket) {
       });
 
 });
+var btoa = require('btoa');
+function _arrayBufferToBase64(buffer) {
+      var binary = '';
+      var bytes = new Uint8ClampedArray(buffer);
+      var len = bytes.byteLength;
+      for (var i = 0; i < len; i++) {
+          binary += String.fromCharCode(bytes[i]);
+      }
+      return btoa(binary);
+  }
 
 serverNamespace.on('connection', function (socket) {
       console.log('Server connected');
@@ -67,7 +79,7 @@ serverNamespace.on('connection', function (socket) {
       });
 
       socket.on('image', (data) => {
-            console.log(data);
+            // console.log(_arrayBufferToBase64(data.image));
             clientNamespace.emit('image', data.image);
       })
 
