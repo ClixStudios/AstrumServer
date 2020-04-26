@@ -7,15 +7,19 @@ const clientNamespace = io.of('/client');
 
 let lobbyPlayers = [];
 
-app.get('/', function (req, res) {
-      console.log('dir: /');
-      res.sendFile(__dirname + '/html/index.html');
-});
+// app.get('/', function (req, res) {
+//       console.log('dir: /');
+//       res.sendFile(__dirname + '/html/index.html');
+// });
 
 app.get('/image', function (req, res) {
       console.log('Sending Image');
       res.sendFile(__dirname + '/image.png');
-})
+});
+
+
+// Client to Server Functions
+
 
 clientNamespace.on('connection', function (socket) {
 
@@ -51,16 +55,10 @@ clientNamespace.on('connection', function (socket) {
       });
 
 });
-var btoa = require('btoa');
-function _arrayBufferToBase64(buffer) {
-      var binary = '';
-      var bytes = new Uint8ClampedArray(buffer);
-      var len = bytes.byteLength;
-      for (var i = 0; i < len; i++) {
-          binary += String.fromCharCode(bytes[i]);
-      }
-      return btoa(binary);
-  }
+
+
+// Server to Client Functions
+
 
 serverNamespace.on('connection', function (socket) {
       console.log('Server connected');
